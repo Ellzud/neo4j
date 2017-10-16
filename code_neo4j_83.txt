@@ -1,0 +1,53 @@
+load csv with headers from
+"file:/83_people.csv"
+as line
+create(:people{name:line.name})
+
+load csv with headers from
+"file:/83_hobbies.csv"
+as line
+create (:hobbies{hobby:line.hobby})
+
+load csv with headers from
+"file:/83_people_hobbies.csv"
+as line
+match(p:people{name:line.name})
+match(h:hobbies{hobby:line.hobby})
+create (p)- [:likes] -> (h)
+
+load csv with headers from
+"file:/83_genders.csv"
+as line
+create(:gender{gender:line.gender})
+
+load csv with headers from
+"file:/83_people_genders.csv"
+as line
+match(p:people{name:line.name})
+match(g:gender{gender:line.gender})
+create (p)- [:isgender] -> (g)
+
+load csv with headers from
+"file:/83_ages.csv"
+as line
+create ( :ages{age:line.age})
+
+load csv with headers from
+"file:/83_people_ages.csv"
+as line
+match(p:people{name:line.name})
+match(a:ages{age:line.age})
+create (p)-[:isAge] -> (a)
+
+load csv with headers from
+"file:/83_cities.csv"
+as line
+create ( :cities{city:line.city})
+
+load csv with headers from
+"file:/83_people_cities.csv"
+as line
+match(p:people{name:line.name})
+match(c:cities{city:line.city})
+create (p)-[:lives] -> (c)
+
